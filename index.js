@@ -95,8 +95,14 @@ function Airplane(name) {
     this.odometer = 0,
     this.fill = function(gallons){
 this.tank += gallons;
+    },
+    this.drive = function(distance){
+      this.odometer += distance;
+      this.tank -= (distance / milesPerGallon);
+      if(this.tank < 0){
+        return `I ran out of fuel at ${this.odometer} miles!`;
+      }
     }
-
   }
   
   Car.prototype.fill = function(gallons){
@@ -112,10 +118,7 @@ this.tank += gallons;
   */
  function Baby(name, age, favoriteToy) {
    Person.call(this, name, age),
-   this.favoriteToy = favoriteToy,
-   this.play = function(){
-     return `Playing with ${favoriteToy}`;
-   }
+   this.favoriteToy = favoriteToy
   }
 
   Baby.prototype = Object.create(Person.prototype);
@@ -127,9 +130,13 @@ this.tank += gallons;
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
+
     1. Window Binding: When not inside something, 'this' refers to the window it sits inside.
+
     2. Implicit Binding: When inside a method of an object, 'this' refers to the object which owns the method.
+
     3. New Binding: When creating a new named object from a constructor function, 'this' refers specifically to that newly created object post-creation.
+
     4. Explicit Binding: When using '.call' or '.apply', 'this' refers to the object you applied the new functions to.
   */
   
